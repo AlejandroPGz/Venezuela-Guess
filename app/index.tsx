@@ -1,15 +1,13 @@
-import { Text, View } from "react-native";
+import { Login } from "../components/Login";
+import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text className="text-orange-500">Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <SafeAreaProvider>
+      <View className="flex items-center justify-center">
+        <Login/>
+      </View>
+    </SafeAreaProvider>
   );
 }
