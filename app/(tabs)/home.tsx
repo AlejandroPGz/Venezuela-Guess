@@ -1,8 +1,13 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useRouter } from 'expo-router';
 
 export default function Home() {
+
+  const router = useRouter();
+
+
   return (
     <SafeAreaView className="bg-cloudy-200 h-full w-full pt-4">
       <View className="text-center text-cloudy-950 w-full justify-center items-center h-1/4">
@@ -13,7 +18,9 @@ export default function Home() {
       </View>
       <View className="text-center h-1/4 text-cloudy-950 w-full justify-center items-center">
         <TouchableOpacity className="w-1/2 border-2 border-cloudy-600 py-4 px-6 rounded-2xl">
-        <Text className="text-2xl font-bold text-center text-cloudy-600">Wiki</Text>
+        <Text 
+        onPress={() => router.push("screens/wiki")}
+        className="text-2xl font-bold text-center text-cloudy-600">Wiki</Text>
         </TouchableOpacity>
         <TouchableOpacity className="mt-4 w-1/2 bg-cloudy-500 py-4 px-6 rounded-2xl">
         <Text className="text-2xl font-bold text-center text-scarpa-flow-50">Jugar</Text>

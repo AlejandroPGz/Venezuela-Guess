@@ -26,6 +26,7 @@ export default function SingUp() {
     // Signed in 
     const user = userCredential.user;
     console.log(user);
+    if (user) router.replace("/home")
     // ...
   })
   .catch((error) => {
