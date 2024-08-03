@@ -1,10 +1,12 @@
 import { View, Text, TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
 import React, { useState } from 'react'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useRouter } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { auth } from "../../../configs/FirebaseConfig";
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import {AsyncStorage} from 'react-native';
+
 
 export default function SingIn() {
 
@@ -12,6 +14,8 @@ export default function SingIn() {
   const router = useRouter();
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const user = auth.currentUser;
+  console.log(user?.email, "sin");
 
   const onSingIn = () => {
 
@@ -24,6 +28,20 @@ export default function SingIn() {
     // Signed in 
     const user = userCredential.user;
     console.log(user);
+    _storeData = async () => {
+      try {
+        await AsyncStorage.setItem(
+          'currentUser:key',
+          user,
+        );
+      } catch (error) {
+        // Error saving data
+      }
+    };
+    _storeData();
+    if (user) {
+      router.navigate("/")
+    }
     // ...
   })
   .catch((error) => {
