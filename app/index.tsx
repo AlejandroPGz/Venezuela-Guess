@@ -4,13 +4,14 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { auth } from "../configs/FirebaseConfig";
 import { Redirect } from "expo-router";
 import { useEffect, useState } from "react";
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Index() {
   
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
-
+  //ReactNativeAsyncStorage.clear()
   // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
