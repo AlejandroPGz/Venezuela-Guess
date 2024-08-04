@@ -15,7 +15,6 @@ export default function SingIn() {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const user = auth.currentUser;
-  console.log(user?.email, "sin");
 
   const onSingIn = () => {
 

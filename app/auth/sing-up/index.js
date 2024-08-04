@@ -25,15 +25,12 @@ export default function SingUp() {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    console.log(user);
     if (user) router.replace("/home")
-    // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorCode, errorMessage);
-    // ..
   });
   }
 
