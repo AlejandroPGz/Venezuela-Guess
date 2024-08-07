@@ -7,9 +7,8 @@ import { UserContext } from '@/context/userContext';
 export default function Home() {
 
   const router = useRouter();
-
   const { user } = useContext(UserContext);
-
+  
   return (
     <SafeAreaView className="bg-cloudy-200 h-full w-full pt-4">
       <View className="text-center text-cloudy-950 w-full justify-center items-center h-1/4">
@@ -21,7 +20,7 @@ export default function Home() {
       <View className="text-center h-1/4 text-cloudy-950 w-full justify-center items-center">
         <TouchableOpacity className="w-1/2 border-2 border-cloudy-600 py-4 px-6 rounded-2xl">
         <Text 
-        onPress={() => router.push("screens/wiki")}
+        onPress={() => router.push("/wiki")}
         className="text-2xl font-bold text-center text-cloudy-600">Wiki</Text>
         </TouchableOpacity>
         <TouchableOpacity className="mt-4 w-1/2 bg-cloudy-500 py-4 px-6 rounded-2xl">

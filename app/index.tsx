@@ -1,11 +1,9 @@
 import { Login } from "../components/Login";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { auth } from "../configs/FirebaseConfig";
 import { Redirect } from "expo-router";
-import { useContext, useEffect, useState } from "react";
-import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-import { MyProvider, UserContext } from "@/context/userContext";
+import { useContext } from "react";
+import { UserContext } from "@/context/userContext";
 
 
 export default function Index() {

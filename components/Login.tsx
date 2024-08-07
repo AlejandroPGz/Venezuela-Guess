@@ -10,10 +10,7 @@ export function Login() {
   const router = useRouter();
   // paddingTop: insets.top,
 
-  const { user, setUser } = useContext(UserContext);
-
-  console.log(user, setUser, "pave en login");
-  
+  const { user, setUser } = useContext(UserContext);  
 
   return (
     <View className="w-screen h-screen bg-scarpa-flow-100" style={{  paddingBottom: insets.bottom }}>

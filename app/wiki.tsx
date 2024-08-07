@@ -1,34 +1,17 @@
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, ActivityIndicator, FlatList } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import StateCard from '@/components/wiki/stateCard'
-const flag = require("../../assets/images/flag.png")
+import { StatesContext } from '@/context/countriesContext'
+const flag = require("../assets/images/flag.png")
 
 export default function Wiki() {
-
+  
+    const { states, initializing } = useContext(StatesContext);    
     const router = useRouter();
-    const [states, setStates] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState(null)  
-
-    const getStates = async () => {
-      function SortArray(x, y) {
-        return x.name.localeCompare(y.name);
-      }
-        const resp = await fetch("https://venezuela-api.onrender.com/api/states/66ae80a80a3590155ccae9ee/allStates/venezuela/");
-        const data = await resp.json();
-        //console.log(data[0]);
-        data.sort(SortArray);
-        setStates(data)
-        setLoading(false);
-    }
-    
-    useEffect(() => {
-      getStates()
-    }, [])
-
     const handleSearch = async (value) => {
       if (value.trim().length > 0) {
         const search = states.filter(country => country.name.toLowerCase().startsWith(value.toLowerCase( )))
@@ -61,7 +44,7 @@ export default function Wiki() {
       </View>
 
 
-      {loading&&
+      {initializing&&
       <ActivityIndicator className="mt-6" size="large" color="#26252c" />}
 
       {states&&!search && 

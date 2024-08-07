@@ -23,7 +23,6 @@ export const MyProvider = ({ children }) => {
     console.log("comprobando");
   } else {
     console.log("comprobado");
-    console.log(auth.currentUser?.email);
   };
 
     return (
