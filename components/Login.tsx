@@ -1,13 +1,20 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from 'expo-router';
 const img = require("./../assets/images/imagen1logo.jpg");
+import { UserContext } from '../context/userContext';
 
 export function Login() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   // paddingTop: insets.top,
+
+  const { user, setUser } = useContext(UserContext);
+
+  console.log(user, setUser, "pave en login");
+  
+
   return (
     <View className="w-screen h-screen bg-scarpa-flow-100" style={{  paddingBottom: insets.bottom }}>
       <Image className="h-2/4 w-full" style={{ resizeMode: 'stretch'}} source={img}></Image>

@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router';
+import { UserContext } from '@/context/userContext';
 
 export default function Home() {
 
   const router = useRouter();
 
+  const { user } = useContext(UserContext);
 
   return (
     <SafeAreaView className="bg-cloudy-200 h-full w-full pt-4">
