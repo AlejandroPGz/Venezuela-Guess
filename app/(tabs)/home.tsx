@@ -24,7 +24,9 @@ export default function Home() {
         className="text-2xl font-bold text-center text-cloudy-600">Wiki</Text>
         </TouchableOpacity>
         <TouchableOpacity className="mt-4 w-1/2 bg-cloudy-500 py-4 px-6 rounded-2xl">
-        <Text className="text-2xl font-bold text-center text-scarpa-flow-50">Jugar</Text>
+        <Text 
+        onPress={() => router.push("/(game)")}
+        className="text-2xl font-bold text-center text-scarpa-flow-50">Jugar</Text>
         </TouchableOpacity>
       </View>
       <View className="w-full h-1/4 justify-center items-center">
