@@ -18,11 +18,18 @@ export default function Profile() {
   return (
     <SafeAreaView className="bg-cloudy-200 h-full w-full pt-4">
       <Text>Profile</Text>
-      {user && 
+      {user ? 
       <TouchableOpacity 
       onPress={handleSingOut}
     className="w-full bg-scarpa-flow-950 h-16 mt-10 rounded-xl justify-center items-center"> 
       <Text className="text-lg text-scarpa-flow-50 font-extrabold">Sing Out</Text>
+    </TouchableOpacity>
+      :
+
+      <TouchableOpacity 
+      onPress={() => router.replace("auth/sing-in")}
+    className="w-full bg-scarpa-flow-950 h-16 mt-10 rounded-xl justify-center items-center"> 
+      <Text className="text-lg text-scarpa-flow-50 font-extrabold">Ingresar</Text>
     </TouchableOpacity>
 
       }

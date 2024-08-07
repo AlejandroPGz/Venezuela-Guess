@@ -1,11 +1,12 @@
 import { View, Text, TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Redirect, useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { auth } from "../../../configs/FirebaseConfig";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {AsyncStorage} from 'react-native';
+import { UserContext } from '@/context/userContext';
 
 
 export default function SingIn() {
@@ -14,7 +15,7 @@ export default function SingIn() {
   const router = useRouter();
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  const user = auth.currentUser;
+  const { user, setUser } = useContext(UserContext);
 
   const onSingIn = () => {
 
@@ -54,8 +55,15 @@ export default function SingIn() {
 
   }
 
+  const singAnonim = () => {
+    setUser(null)
+    router.push("/home")
+  }
+
   return (
-    <View className="w-screen h-screen bg-scarpa-flow-50 px-4 mt-2" style={{  paddingTop: insets.top, paddingBottom: insets.bottom }}>
+   <>
+    {!user?
+       <View className="w-screen h-screen bg-scarpa-flow-50 px-4 mt-2" style={{  paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <TouchableOpacity>
         <Ionicons 
         onPress={() => router.push("/")}
@@ -89,6 +97,15 @@ export default function SingIn() {
       className="w-full bg-scarpa-flow-50 h-16 mt-10 rounded-xl justify-center items-center border-input"> 
         <Text className="text-lg text-scarpa-flow-950 font-extrabold ">Create Account</Text>
       </TouchableOpacity>
+      <TouchableOpacity 
+      onPress={singAnonim}
+      className="w-full bg-scarpa-flow-50 h-16 mt-10 rounded-xl justify-center items-center border-input"> 
+        <Text className="text-lg text-scarpa-flow-950 font-extrabold ">Continuar como invitado</Text>
+      </TouchableOpacity>
     </View>
+    :
+    router.replace("/home")
+    }
+    </>
   )
 }

@@ -1,31 +1,32 @@
 import { View, Text, TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../configs/FirebaseConfig";
+import { UserContext } from '@/context/userContext';
 
 export default function SingUp() {
-
+  
+  const { user, setUser } = useContext(UserContext);
   const insets = useSafeAreaInsets();
   const router = useRouter();
 
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  const [user, setUser] = useState()
+  const [userInput, setUserInput] = useState()
 
   const onCreateAccount = () => {
 
-    if (!email&&!password&&!user) {
+    if (!email&&!password&&!userInput) {
       ToastAndroid.show("Please", ToastAndroid.LONG)
     }
 
     createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    if (user) router.replace("/home")
+    const userLog = userCredential.user;
+    if (userLog) router.replace("/home")
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -36,8 +37,9 @@ export default function SingUp() {
 
 
   return (
-    
-    <View className="w-screen h-screen bg-scarpa-flow-50 px-4" style={{  paddingTop: insets.top, paddingBottom: insets.bottom }}>
+    <>
+    {!user?
+      <View className="w-screen h-screen bg-scarpa-flow-50 px-4" style={{  paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <TouchableOpacity>
         <Ionicons 
         onPress={() => router.push("auth/sing-in")}
@@ -53,7 +55,7 @@ export default function SingUp() {
     <View className="mt-4">
       <Text className="text-xl font-medium">Usuario</Text>
       <TextInput 
-      onChangeText={(value)=> {setUser(value)}}
+      onChangeText={(value)=> {setUserInput(value)}}
       placeholder='usuario' className="border-input rounded-lg py-3 px-4 shadow-xl shadow-black bg-white mt-2"></TextInput>
     </View>
     <View className="mt-4">
@@ -82,5 +84,10 @@ export default function SingUp() {
       <Text className="text-lg font-semibold">Already have an account? Sing in</Text>
     </TouchableOpacity>
   </View>
+  :
+  router.replace("/home")
+  }
+    </>
+    
   )
 }

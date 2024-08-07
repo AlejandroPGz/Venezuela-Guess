@@ -16,7 +16,7 @@ const firebaseConfig = {
   storageBucket: "venezuela-game-beta.appspot.com",
   messagingSenderId: "810896129746",
   appId: "1:810896129746:web:6ffa1350bdb6f05b15370b",
-  measurementId: "G-B4PNGN5TEV"
+  measurementId: "G-B4PNGN5TEV",
 };
 
 // Initialize Firebase
