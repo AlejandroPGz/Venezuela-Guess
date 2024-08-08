@@ -22,11 +22,11 @@ export default function Wiki() {
   return (
     <SafeAreaView className="w-full h-full bg-scarpa-flow-50 px-4 mt-2 mb-4">
         <ScrollView className="mb-4">
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <Ionicons 
         onPress={() => router.push("/home")}
         style={{marginTop: 10}} name="chevron-back" size={24} color="black" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Text className="text-4xl font-semibold text-cloudy-950 mt-8">Wiki</Text>
       <View className="mt-6 flex-row items-center w-full">
         <Text className="text-3xl font-medium  text-cloudy-900">Venezuela</Text>

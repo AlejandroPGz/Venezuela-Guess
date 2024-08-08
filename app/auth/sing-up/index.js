@@ -9,7 +9,7 @@ import { UserContext } from '@/context/userContext';
 
 export default function SingUp() {
   
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const insets = useSafeAreaInsets();
   const router = useRouter();
 
@@ -40,11 +40,11 @@ export default function SingUp() {
     <>
     {!user?
       <View className="w-screen h-screen bg-scarpa-flow-50 px-4" style={{  paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <Ionicons 
         onPress={() => router.push("auth/sing-in")}
         style={{marginTop: 10}} name="chevron-back" size={24} color="black" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     <Text className="text-4xl font-semibold text-scarpa-flow-950 mt-8">Crear Cuenta</Text>
     <View className="mt-10">
       <Text className="text-xl font-medium">Email</Text>

@@ -31,7 +31,7 @@ export default function Profile() {
     </TouchableOpacity>
       :
       <TouchableOpacity 
-      onPress={() => router.replace("auth/sing-in")}
+      onPress={() => router.push("auth/sing-in")}
     className="w-3/5 p-4 bg-scarpa-flow-950 h-16 mt-10 rounded-xl justify-center items-center"> 
       <Text className="text-lg text-scarpa-flow-50 font-extrabold">Ingresar</Text>
     </TouchableOpacity>

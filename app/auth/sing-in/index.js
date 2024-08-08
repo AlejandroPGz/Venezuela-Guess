@@ -40,7 +40,7 @@ export default function SingIn() {
     };
     _storeData();
     if (user) {
-      router.navigate("/")
+      router.replace("/")
     }
     // ...
   })
@@ -57,18 +57,18 @@ export default function SingIn() {
 
   const singAnonim = () => {
     setUser(null)
-    router.push("/home")
+    router.replace("/home")
   }
 
   return (
    <>
     {!user?
        <View className="w-screen h-screen bg-scarpa-flow-50 px-4 mt-2" style={{  paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <Ionicons 
         onPress={() => router.push("/")}
         style={{marginTop: 10}} name="chevron-back" size={24} color="black" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Text className="text-4xl font-semibold text-scarpa-flow-950 mt-8">Bienvenido de vuelta</Text>
       <Text className="text-3xl font-medium mt-6 text-scarpa-flow-500">Te extrañamos...</Text>
       <Text className="text-3xl font-medium mt-6 text-scarpa-flow-500">Inicia Sesión</Text>
