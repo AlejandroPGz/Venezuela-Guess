@@ -18,14 +18,18 @@ export default function Home() {
         <Text className="text-2xl text-center text-cloudy-950 font-medium ">!Puedes acceder a la wiki donde aprenderás sobre cada Estado de Venezuela o empezar a jugar los distintos modos de juego!</Text>
       </View>
       <View className="text-center h-1/4 text-cloudy-950 w-full justify-center items-center">
-        <TouchableOpacity className="w-1/2 border-2 border-cloudy-600 py-4 px-6 rounded-2xl">
-        <Text 
+        <TouchableOpacity 
         onPress={() => router.push("/wiki")}
+        className="w-1/2 border-2 border-cloudy-600 py-4 px-6 rounded-2xl">
+        <Text 
+        
         className="text-2xl font-bold text-center text-cloudy-600">Wiki</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="mt-4 w-1/2 bg-cloudy-500 py-4 px-6 rounded-2xl">
-        <Text 
+        <TouchableOpacity 
         onPress={() => router.push("/(game)")}
+        className="mt-4 w-1/2 bg-cloudy-500 py-4 px-6 rounded-2xl">
+        <Text 
+        
         className="text-2xl font-bold text-center text-scarpa-flow-50">Jugar</Text>
         </TouchableOpacity>
       </View>
