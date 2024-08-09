@@ -9,21 +9,24 @@ export default function GuessState() {
   const [level, setLevel] = useState(Number);
   const { states, initializing } = useContext(StatesContext);    
   const [gameArray, setGameArray] = useState([]);
- 
+
   useEffect(() => {
     let newArray = []
-  if (Number(glob.level) === 1) {
-    for (let i = 0; i < 12; i++) {     
-      newArray.push(states[i])
-       
-    }    
-    setGameArray(newArray.sort(() => (Math.random() - 0.5))) 
-  } else {
-    for (let i = 12; i < 24; i++) {     
-      newArray.push(states[i])
-    }    
-    setGameArray(newArray.sort(() => (Math.random() - 0.5))) 
-  }  
+    if (states) {
+      if (Number(glob.level) === 1) {
+        for (let i = 0; i < 12; i++) {     
+          newArray.push(states[i])
+           
+        }    
+        setGameArray(newArray.sort(() => (Math.random() - 0.5))) 
+      } else {
+        for (let i = 12; i < 24; i++) {     
+          newArray.push(states[i])
+        }    
+        setGameArray(newArray.sort(() => (Math.random() - 0.5))) 
+      }  
+    }
+
   }, [states])  
     
   return (
@@ -32,7 +35,7 @@ export default function GuessState() {
       <ActivityIndicator className="mt-6" size="large" color="#26252c" />}
       {gameArray?
       gameArray.map((state, index) => (
-        <Text>{state.name}</Text>
+        <Text key={index}>{state.name}</Text>
       ))
       :
       <Text>Hubo un error, intente de nuevo</Text>

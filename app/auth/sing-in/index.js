@@ -40,7 +40,7 @@ export default function SingIn() {
     };
     _storeData();
     if (user) {
-      router.replace("/")
+      router.push("/")
     }
     // ...
   })
@@ -57,7 +57,7 @@ export default function SingIn() {
 
   const singAnonim = () => {
     setUser(null)
-    router.replace("/home")
+    router.push("/home")
   }
 
   return (
@@ -104,7 +104,7 @@ export default function SingIn() {
       </TouchableOpacity>
     </View>
     :
-    router.replace("/home")
+    router.push("/home")
     }
     </>
   )
