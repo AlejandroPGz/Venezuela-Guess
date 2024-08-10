@@ -3,6 +3,9 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      width:{
+        options: "48%"
+      },
       borderWidth:{
         "input": "1px"
       },

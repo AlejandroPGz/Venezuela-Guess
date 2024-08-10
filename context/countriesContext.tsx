@@ -19,6 +19,8 @@ export const StatesProvider = ({ children }) => {
   
   useEffect(() => {
     getStates()
+    console.log("a");
+    
   }, [])
 
     return (
