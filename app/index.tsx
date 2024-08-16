@@ -13,7 +13,7 @@ export default function Index() {
   return (
     <SafeAreaProvider>
       <>
-      <View className="flex items-center justify-center h-screen w-screen">
+      <View className="flex items-center justify-center h-full w-fulh-full">
         {initializing? 
         <ActivityIndicator size="large" color="#26252c" />
         :

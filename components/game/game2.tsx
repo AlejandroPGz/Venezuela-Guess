@@ -1,0 +1,105 @@
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { StatesContext } from '@/context/countriesContext'
+import { useSortStates } from '@/hooks/useSortStates'
+import { useGame } from '@/hooks/useGame'
+
+import Options from './options'
+import Score from './score'
+import StateImg from './stateImg'
+
+const Game2 = memo(({level}) => {
+    //hooks
+    const { states, initializing } = useContext(StatesContext);
+    const { gameArray, isLoading } = useSortStates(states, level);
+
+    //states;
+    const [gameState, setGameState] = useState({
+      indexGame: 0,
+      currentState: null,
+      options: null,
+      correct: 0,
+      incorrect: 0,
+      rightId: null,
+      failId: null,
+      selected: false,
+      gameStarted: false,
+      finished: false,
+    });
+
+    const handleTouch = useCallback((option, index) => {
+      setGameState((prevState) => {
+        const isCorrect = option === gameArray[prevState.indexGame].name;
+        return {
+          ...prevState,
+          selected: true,
+          correct: isCorrect ? prevState.correct + 1 : prevState.correct,
+          incorrect: isCorrect ? prevState.incorrect : prevState.incorrect + 1,
+          rightId: isCorrect ? index : null,
+          failId: isCorrect ? null : index,
+          finished: prevState.indexGame === 11,
+        };
+      });
+  
+      setTimeout(() => {
+        setGameState((prevState) => ({
+          ...prevState,
+          indexGame: prevState.indexGame + 1,
+          selected: false,
+          rightId: null,
+          failId: null,
+        }));
+      }, 1000);
+    }, [gameArray]);
+
+  useGame(gameArray, states, setGameState, gameState);
+
+  return (
+    <>
+    {isLoading&&
+    <ActivityIndicator size="large" color="#26252c" />
+    }
+    <>
+    {!isLoading&&gameArray&&!gameState.gameStarted&&
+    <>
+    <Text>Hay estados</Text>
+    <TouchableOpacity
+    onPress={() => setGameState((prevState) => ({ ...prevState, gameStarted: true }))}>
+      <Text>Start</Text>
+    </TouchableOpacity>
+    </>
+    }
+    </>
+    
+    {gameState.gameStarted&&!gameState.finished&&
+      <View className="h-full w-full justify-center items-center"> 
+        <Score correct={gameState.correct} incorrect={gameState.incorrect} index={gameState.indexGame} />
+        <StateImg currentState={gameArray[gameState.indexGame]} />
+        <Options
+         options={gameState.options}
+         handleTouch={handleTouch}
+         selected={gameState.selected}
+         rightId={gameState.rightId}
+         failId={gameState.failId}/>
+      </View>
+    }
+    {gameState.finished&&
+      <>
+        <Text>Terminó</Text>
+        <Text>Acertadas:{gameState.correct}</Text>
+        <Text>Errores:{gameState.incorrect}</Text>
+        <Text>Comenzar de nuevo</Text>
+        <Text>Menu</Text>
+
+      </>
+    }
+    {!isLoading&&!gameArray&&
+    <Text>Hubo un error</Text>
+    }
+   
+    </>
+  )
+})
+
+export default memo(Game2);

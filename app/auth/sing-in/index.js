@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ToastAndroid, ScrollView } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Redirect, useRouter } from 'expo-router';
@@ -8,6 +8,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import {AsyncStorage} from 'react-native';
 import { UserContext } from '@/context/userContext';
 
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function SingIn() {
 
@@ -63,12 +64,8 @@ export default function SingIn() {
   return (
    <>
     {!user?
-       <View className="w-screen h-screen bg-scarpa-flow-50 px-4 mt-2" style={{  paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      {/* <TouchableOpacity>
-        <Ionicons 
-        onPress={() => router.push("/")}
-        style={{marginTop: 10}} name="chevron-back" size={24} color="black" />
-      </TouchableOpacity> */}
+       <SafeAreaView className="w-full h-full bg-scarpa-flow-50 px-4 mt-2">
+      <ScrollView>
       <Text className="text-4xl font-semibold text-scarpa-flow-950 mt-8">Bienvenido de vuelta</Text>
       <Text className="text-3xl font-medium mt-6 text-scarpa-flow-500">Te extrañamos...</Text>
       <Text className="text-3xl font-medium mt-6 text-scarpa-flow-500">Inicia Sesión</Text>
@@ -86,23 +83,23 @@ export default function SingIn() {
         placeholder='' 
         className="border-input rounded-lg py-3 px-4 shadow-xl shadow-black bg-white mt-2"></TextInput>
       </View>
-
       <TouchableOpacity 
       onPress={onSingIn}
-      className="w-full bg-scarpa-flow-950 h-16 mt-10 rounded-xl justify-center items-center"> 
+      className="w-full bg-scarpa-flow-950 h-16 mt-8 rounded-xl justify-center items-center"> 
         <Text className="text-lg text-scarpa-flow-50 font-extrabold">Sing In</Text>
       </TouchableOpacity>
       <TouchableOpacity 
-      onPress={() => router.push("auth/sing-up")}
-      className="w-full bg-scarpa-flow-50 h-16 mt-10 rounded-xl justify-center items-center border-input"> 
-        <Text className="text-lg text-scarpa-flow-950 font-extrabold ">Create Account</Text>
-      </TouchableOpacity>
-      <TouchableOpacity 
       onPress={singAnonim}
-      className="w-full bg-scarpa-flow-50 h-16 mt-10 rounded-xl justify-center items-center border-input"> 
+      className="w-full bg-scarpa-flow-50 h-16 mt-8 rounded-xl justify-center items-center border-input"> 
         <Text className="text-lg text-scarpa-flow-950 font-extrabold ">Continuar como invitado</Text>
       </TouchableOpacity>
-    </View>
+      <TouchableOpacity 
+      onPress={() => router.push("auth/sing-up")}
+      className="w-full bg-scarpa-flow-50 h-16 mt-8 rounded-xl justify-center items-center border-input"> 
+        <Text className="text-lg text-scarpa-flow-950 font-extrabold ">Create Account</Text>
+      </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
     :
     router.push("/home")
     }

@@ -19,12 +19,6 @@ export const MyProvider = ({ children }) => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  if (initializing) {
-    console.log("comprobando");
-  } else {
-    console.log("comprobado");
-  };
-
     return (
         <UserContext.Provider value={{ user, setUser, initializing }}>
             {children}

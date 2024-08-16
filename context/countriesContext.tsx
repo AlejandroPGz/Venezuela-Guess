@@ -5,7 +5,7 @@ export const StatesContext = createContext();
 export const StatesProvider = ({ children }) => {
   const [initializing, setInitializing] = useState(true);
   const [states, setStates] = useState();
-
+  
   const getStates = async () => {
     function SortArray(x, y) {
       return x.name.localeCompare(y.name);
@@ -18,9 +18,7 @@ export const StatesProvider = ({ children }) => {
   }
   
   useEffect(() => {
-    getStates()
-    console.log("a");
-    
+    getStates()    
   }, [])
 
     return (

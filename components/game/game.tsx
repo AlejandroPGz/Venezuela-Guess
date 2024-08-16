@@ -1,72 +1,94 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-const flag = require("../../assets/images/flag.png")
+import { StatesContext } from '@/context/countriesContext'
+import { useSortStates } from '@/hooks/useSortStates'
+import { useGame } from '@/hooks/useGame'
 
-export function Game({gameArray, allStates}) {
+import Options from './options'
+import Score from './score'
+import StateImg from './stateImg'
 
-    const [currentState, setCurrentState] = useState(gameArray[0])
-    const [options, setOptions] = useState()
+const Game = memo(({level}) => {
+    //hooks
+    const { states, initializing } = useContext(StatesContext);
+    const { gameArray, isLoading } = useSortStates(states, level);
 
-    let i = 0;
+    //states;
+    const [i, setI] = useState(0);
+    const [currentState, setCurrentState] = useState();
+    const [options, setOptions] = useState();
+
+    const [correct, setCorrect] = useState(0);
+    const [incorrect, setIncorrect] = useState(0);
+
+    const [rightId, setRightId] = useState();
+    const [failId, setFailId] = useState();
+    const [selected, setSelected] = useState(false);
+
+    const [gameStarted, setGameStarted] = useState(false);
+    const [finished, setFinished] = useState(false);
 
     const handleTouch = (option, index) => {
-        if (option === currentState.name) {
-            console.log("bien");
-        } else {
-            console.log("se equivoco");
-            
+        setSelected(true);
+        if (i === 11) {
+          setFinished(true);
         }
-    }
-
+        if (option === gameArray[i].name) {
+            setCorrect(correct+1);
+            setRightId(index)           
+        } else {
+            setIncorrect(incorrect+1)
+            setFailId(index)
+        }
+        setTimeout(() => {
+          setI(i+1);
+            setSelected(false);
+            setFailId(undefined);
+            setRightId(undefined);
+        }, 700);
+    }     
     useEffect(() => {
-      
-        if (i < gameArray.length) {
-            setCurrentState(gameArray[i])            
-            //crear lista de opciones
-            let optionsArray = []
-            allStates.sort(() => (Math.random() - 0.5));
-            for (let i = 0; i < 3; i++) {
-                if (allStates[i].name !== currentState.name) {
-                    optionsArray.push(allStates[i].name)                    
-                } else i--;
-            }
-            optionsArray.push(currentState.name)
-            optionsArray.sort(() => (Math.random() - 0.5));
-            setOptions(optionsArray)         
-        } else {
-            console.log("no hay mas");
-            
-        }
+    }, [gameArray, i])
+    useGame(gameArray, states, i, setOptions, setCurrentState, finished, correct, incorrect, setFinished);
 
-        
-    }, [currentState])
-        
   return (
-    <View className="h-full w-full justify-center items-center">
-        {currentState&&
-        <>
-        <View className="w-full h-1/4 justify-center items-center">
-            <Image className="h-full w-4/5 ml-4" style={{ resizeMode: 'cover'}} source={flag}></Image>
-        </View>
-    <View className="mt-6 w-full flex-row flex-wrap rounded-xl justify-center items-center">
-     {options&&
-     options.map((option, index) => {
-        return (
-     <TouchableOpacity
-     className="bg-cloudy-50 rounded-xl w-2/5 my-2 mx-2 h-20 justify-center items-center flex"
-     key={option}
-     onPress={() => handleTouch(option, index)}
-     >
-        <Text className="text-2xl text-center w-full font-medium mx-1">{option}</Text>
-     </TouchableOpacity>
-        )
-     })
-     }
-
-        </View>
-        </>
-        }
-    </View>
+    <>
+    {isLoading&&
+    <ActivityIndicator size="large" color="#26252c" />
+    }
+    <>
+    {!isLoading&&gameArray&&!gameStarted&&
+    <>
+    <Text>Hay estados</Text>
+    <TouchableOpacity
+    onPress={() => {
+      setGameStarted(true);
+    }}>
+      <Text>Start</Text>
+    </TouchableOpacity>
+    </>
+    }
+    </>
+    
+    {gameStarted&&!finished&&
+      <View className="h-full w-full justify-center items-center"> 
+        <Score correct={correct} incorrect={incorrect} />
+        <StateImg currentState={gameArray[i]} />
+        <Options
+         options={options}
+         handleTouch={handleTouch}
+         selected={selected}
+         rightId={rightId}
+         failId={failId}/>
+      </View>
+    }
+    {!isLoading&&!gameArray&&
+    <Text>Hubo un error</Text>
+    }
+   
+    </>
   )
-}
+})
+
+export default memo(Game);

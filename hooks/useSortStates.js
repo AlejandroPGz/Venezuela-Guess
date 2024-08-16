@@ -32,7 +32,7 @@ export const useSortStates = (states, level) => {
 
     useEffect( () => {
         parser()
-    }, [])
+    }, [states])
   
 
     return {
