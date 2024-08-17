@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 
 export const useGame = (gameArray, states, setGameState, gameState) => {
   
-    console.log(gameState.indexGame);
+    //console.log(gameState.indexGame);
     
 
     const gameComprobation =  useCallback(() => {

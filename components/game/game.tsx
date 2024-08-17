@@ -12,76 +12,91 @@ import StateImg from './stateImg'
 const Game = memo(({level}) => {
     //hooks
     const { states, initializing } = useContext(StatesContext);
-    const { gameArray, isLoading } = useSortStates(states, level);
-
+    const { gameArray, isLoading } = useSortStates(level);
+    
     //states;
-    const [i, setI] = useState(0);
-    const [currentState, setCurrentState] = useState();
-    const [options, setOptions] = useState();
+    const [gameState, setGameState] = useState({
+      indexGame: 0,
+      currentState: null,
+      options: null,
+      correct: 0,
+      incorrect: 0,
+      rightId: null,
+      failId: null,
+      selected: false,
+      gameStarted: false,
+      finished: false,
+    });
 
-    const [correct, setCorrect] = useState(0);
-    const [incorrect, setIncorrect] = useState(0);
+    const handleTouch = useCallback((option, index) => {
+      setGameState((prevState) => {
+        const isCorrect = option === gameArray[prevState.indexGame].name;
+        return {
+          ...prevState,
+          selected: true,
+          correct: isCorrect ? prevState.correct + 1 : prevState.correct,
+          incorrect: isCorrect ? prevState.incorrect : prevState.incorrect + 1,
+          rightId: isCorrect ? index : null,
+          failId: isCorrect ? null : index,
+          finished: prevState.indexGame === 11,
+        };
+      });
+  
+      setTimeout(() => {
+        setGameState((prevState) => ({
+          ...prevState,
+          indexGame: prevState.indexGame + 1,
+          selected: false,
+          rightId: null,
+          failId: null,
+        }));
+      }, 1000);
+    }, [gameArray]);
 
-    const [rightId, setRightId] = useState();
-    const [failId, setFailId] = useState();
-    const [selected, setSelected] = useState(false);
-
-    const [gameStarted, setGameStarted] = useState(false);
-    const [finished, setFinished] = useState(false);
-
-    const handleTouch = (option, index) => {
-        setSelected(true);
-        if (i === 11) {
-          setFinished(true);
-        }
-        if (option === gameArray[i].name) {
-            setCorrect(correct+1);
-            setRightId(index)           
-        } else {
-            setIncorrect(incorrect+1)
-            setFailId(index)
-        }
-        setTimeout(() => {
-          setI(i+1);
-            setSelected(false);
-            setFailId(undefined);
-            setRightId(undefined);
-        }, 700);
-    }     
-    useEffect(() => {
-    }, [gameArray, i])
-    useGame(gameArray, states, i, setOptions, setCurrentState, finished, correct, incorrect, setFinished);
+  useGame(gameArray, states, setGameState, gameState);
 
   return (
     <>
     {isLoading&&
-    <ActivityIndicator size="large" color="#26252c" />
+    <View className="h-full w-full justify-center items-center">
+      <ActivityIndicator size="large" color="#26252c" />
+    </View>
     }
     <>
-    {!isLoading&&gameArray&&!gameStarted&&
+    {!isLoading&&gameArray&&!gameState.gameStarted&&
     <>
-    <Text>Hay estados</Text>
+    <View className="h-full w-full justify-center items-center">
     <TouchableOpacity
-    onPress={() => {
-      setGameStarted(true);
-    }}>
-      <Text>Start</Text>
+    className="bg-scarpa-flow-500 py-2 px-4 rounded-full "
+    onPress={() => setGameState((prevState) => ({ ...prevState, gameStarted: true }))}>
+      <Text className="text-xl font-medium text-scarpa-flow-50">Comenzar</Text>
     </TouchableOpacity>
+    </View>
     </>
     }
     </>
     
-    {gameStarted&&!finished&&
+    {gameState.gameStarted&&!gameState.finished&&
       <View className="h-full w-full justify-center items-center"> 
-        <Score correct={correct} incorrect={incorrect} />
-        <StateImg currentState={gameArray[i]} />
+        <Score correct={gameState.correct} incorrect={gameState.incorrect} index={gameState.indexGame} />
+        <StateImg currentState={gameArray[gameState.indexGame]} />
         <Options
-         options={options}
+         options={gameState.options}
          handleTouch={handleTouch}
-         selected={selected}
-         rightId={rightId}
-         failId={failId}/>
+         selected={gameState.selected}
+         rightId={gameState.rightId}
+         failId={gameState.failId}/>
       </View>
+    }
+    {gameState.finished&&
+      <>
+        <Text>Terminó</Text>
+        <Text>Acertadas:{gameState.correct}</Text>
+        <Text>Errores:{gameState.incorrect}</Text>
+        <Text>Comenzar de nuevo</Text>
+        <Text>Menu</Text>
+
+      </>
     }
     {!isLoading&&!gameArray&&
     <Text>Hubo un error</Text>

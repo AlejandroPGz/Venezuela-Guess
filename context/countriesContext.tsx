@@ -7,19 +7,17 @@ export const StatesProvider = ({ children }) => {
   const [states, setStates] = useState();
   
   const getStates = async () => {
-    function SortArray(x, y) {
-      return x.name.localeCompare(y.name);
-    }
       const resp = await fetch("https://venezuela-api.onrender.com/api/states/66ae80a80a3590155ccae9ee/allStates/venezuela/");
-      const data = await resp.json();
-      data.sort(SortArray);
-      setStates(data)
+      const data = await resp.json();       
+      setStates((prev) => (
+        data
+      ))
       setInitializing(false);
   }
   
   useEffect(() => {
     getStates()    
-  }, [])
+  }, []);
 
     return (
         <StatesContext.Provider value={{ states, setStates, initializing }}>
