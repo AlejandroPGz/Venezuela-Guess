@@ -18,28 +18,22 @@ export const useGame = (gameArray, states, setGameState, gameState) => {
                             states.sort(() => (Math.random() - 0.5));
                             i--;
                         };
-                    }
+                    };
                     optionsArray.push(gameArray[gameState.indexGame].name);
-                    optionsArray.sort(() => (Math.random() - 0.5));
-                          
-                    
+                    optionsArray.sort(() => (Math.random() - 0.5));                   
                         setGameState((prevState) => ({
                             ...prevState,
                             options: optionsArray
-                        }))
-                       
-                }
-            } else {
-                console.log("Se acabo");
-            }
-        
-        }
+                        }));
+                };
+            };
+        };
     },
-    [gameArray, gameState.indexGame])
+    [gameArray, gameState.indexGame]);
 
     useEffect( () => {
         gameComprobation();
-    }, [gameComprobation])
+    }, [gameComprobation]);
   
 
     return {

@@ -8,6 +8,7 @@ import { useGame } from '@/hooks/useGame'
 import Options from './options'
 import Score from './score'
 import StateImg from './stateImg'
+import FinishMsg from './finishMsg'
 
 const Game = memo(({level}) => {
     //hooks
@@ -89,14 +90,9 @@ const Game = memo(({level}) => {
       </View>
     }
     {gameState.finished&&
-      <>
-        <Text>Terminó</Text>
-        <Text>Acertadas:{gameState.correct}</Text>
-        <Text>Errores:{gameState.incorrect}</Text>
-        <Text>Comenzar de nuevo</Text>
-        <Text>Menu</Text>
-
-      </>
+    <View className="w-full h-full justify-center items-center">
+      <FinishMsg level={level} correct={gameState.correct} incorrect={gameState.incorrect}/>
+    </View>
     }
     {!isLoading&&!gameArray&&
     <Text>Hubo un error</Text>
