@@ -10,6 +10,8 @@ export default function TabLayout() {
         <Stack.Screen name='index' />
         <Stack.Screen
         name="guessState/[level]"/>
+        <Stack.Screen
+        name="guessCapital/[level]"/>
     </Stack>
     </SafeAreaProvider>
   )

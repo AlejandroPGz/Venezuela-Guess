@@ -37,11 +37,13 @@ export default function Index() {
             <View className="w-full p-4 bg-cloudy-300 justify-center items-center rounded-lg mt-4">
           <Text className="text-xl font-medium text-center">Adivinar Capitales</Text>
           <TouchableOpacity
+          onPress={() => router.push("/guessCapital/1")}
       className="bg-cloudy-100 border border-cloudy-600 w-4/5 py-2 px-6 rounded-xl justify-center items-center mt-4"
       >
         <Text className="text-lg font-bold w-full text-center">Nivel 1</Text>
       </TouchableOpacity>
       <TouchableOpacity
+      onPress={() => router.push("/guessCapital/2")}
       className="bg-cloudy-100 border border-cloudy-600 w-4/5 py-2 px-6 rounded-xl justify-center items-center mt-4"
       >
         <Text className="text-lg font-bold w-full text-center">Nivel 2</Text>

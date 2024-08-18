@@ -10,7 +10,7 @@ import Score from './score'
 import StateImg from './stateImg'
 import FinishMsg from './finishMsg'
 
-const Game = memo(({level}) => {
+const GameState = memo(({level}) => {
     //hooks
     const { states, initializing } = useContext(StatesContext);
     const { gameArray, isLoading } = useSortStates(level);
@@ -102,4 +102,4 @@ const Game = memo(({level}) => {
   )
 })
 
-export default memo(Game);
+export default memo(GameState);

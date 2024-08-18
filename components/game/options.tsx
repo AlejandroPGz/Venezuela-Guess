@@ -9,7 +9,7 @@ const Options = memo(({ options, handleTouch, selected, rightId, failId }) => (
           return (
             <TouchableOpacity
               disabled={selected}
-              className={`rounded-xl w-2/5 my-2 mx-2 h-20 justify-center items-center flex ${
+              className={`rounded-xl w-2/5 my-2 mx-2 h-24 justify-center items-center flex ${
                 rightId === index ? 'bg-green-500' : failId === index ? 'bg-red-500' : 'bg-cloudy-50'
               }`}
               key={index}
