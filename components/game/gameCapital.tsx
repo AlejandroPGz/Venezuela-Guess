@@ -79,7 +79,7 @@ const GameCapital = memo(({level}) => {
     {gameState.gameStarted&&!gameState.finished&&
       <View className="h-full w-full justify-center items-center"> 
         <Score correct={gameState.correct} incorrect={gameState.incorrect} index={gameState.indexGame} />
-        <Text>{gameArray[gameState.indexGame].name}</Text>
+        <Text className="text-xl font-medium text-cloudy-950">{gameArray[gameState.indexGame].name}</Text>
         <StateImg currentState={gameArray[gameState.indexGame]} />
         <Options
          options={gameState.options}
