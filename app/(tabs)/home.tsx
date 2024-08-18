@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Linking, ToastAndroid } from 'react-native'
 import React, { useContext } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router';
@@ -32,8 +32,16 @@ export default function Home() {
         </TouchableOpacity>
       </View>
       <View className="w-full h-1/4 justify-center items-center">
-        <Text className="text-lg font-medium">Alejandro Paradiso Dev</Text>
-        <Text className="text-lg font-medium">Portafolio</Text>
+        <Text 
+        onPress={() => Linking.openURL('https://github.com/AlejandroPGz').catch((err) => {
+          ToastAndroid.show("Failed to open URL", ToastAndroid.LONG)
+        })}
+        className="text-lg font-medium text-cloudy-900 underline decoration-cloudy-900 decoration-solid focus:text-cloudy-400">Alejandro Paradiso Dev</Text>
+        <Text 
+        onPress={() => Linking.openURL('https://github.com/AlejandroPGz').catch((err) => {
+          ToastAndroid.show("Failed to open URL", ToastAndroid.LONG)
+        })}
+        className="text-lg font-medium text-cloudy-800">Portafolio</Text>
       </View>
     </SafeAreaView>
   )
