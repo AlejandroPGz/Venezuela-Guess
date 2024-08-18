@@ -11,12 +11,20 @@ export default function Wiki() {
   
     const { states, initializing } = useContext(StatesContext);    
     const router = useRouter();
+    
     const [search, setSearch] = useState(null)  
     const handleSearch = async (value) => {
       if (value.trim().length > 0) {
         const search = states.filter(country => country.name.toLowerCase().startsWith(value.toLowerCase( )))
         setSearch(search)        
       } else setSearch(false)
+    };
+    function SortArray(x, y) {
+      return x.name.localeCompare(y.name);
+    };
+
+    if (states) {
+      states.sort(SortArray);
     }
 
   return (
@@ -30,7 +38,10 @@ export default function Wiki() {
       <Text className="text-4xl font-semibold text-cloudy-950 mt-8">Wiki</Text>
       <View className="mt-6 flex-row items-center w-full">
         <Text className="text-3xl font-medium  text-cloudy-900">Venezuela</Text>
-        <Image className="h-12 w-14 ml-4" style={{ resizeMode: 'cover'}} source={flag}></Image>
+        <Image className="h-12 w-14 ml-4" style={{ resizeMode: 'cover'}} 
+        source={flag}
+        
+        ></Image>
       </View>
       
       <Text className="text-xl font-medium mt-3 text-cloudy-900">La República Bolivariana de Venezuela, se divide política y administrativamente en 23 estados, el Distrito Capital y un conjunto de islas que conforman las dependencias federales.</Text>
