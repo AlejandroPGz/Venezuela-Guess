@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Venezuela_Game",
-    "slug": "Venezuela_Game",
+    "name": "Venezuela Quizz",
+    "slug": "Venezuela_Quizz",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "",
+    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymus.Venezuela_Quizz"
     },
     "web": {
       "bundler": "metro",
