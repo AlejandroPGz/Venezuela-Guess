@@ -9,7 +9,7 @@ const GuessState = memo(() => {
   
   return (
     <SafeAreaView className="bg-cloudy-200 h-full w-full pt-4 p-4">
-        <Game level={glob.level}></Game>          
+        <Game level={glob.level} gameMode="name"></Game>          
     </SafeAreaView>
   );
 });

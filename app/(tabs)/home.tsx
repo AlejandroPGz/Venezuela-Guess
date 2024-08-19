@@ -1,13 +1,16 @@
 import { View, Text, TouchableOpacity, Linking, ToastAndroid } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router';
 import { UserContext } from '@/context/userContext';
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export default function Home() {
 
   const router = useRouter();
   // const { user } = useContext(UserContext);
+
+    const { isInternetReachable } = useNetInfo();
   
   return (
     <SafeAreaView className="bg-cloudy-200 h-full w-full p-2">

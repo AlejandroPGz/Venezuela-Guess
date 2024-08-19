@@ -1,16 +1,16 @@
-import { View, Text, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
-import React, { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import React, { memo, useCallback, useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatesContext } from '@/context/countriesContext'
 import { useSortStates } from '@/hooks/useSortStates'
-import { useGame } from '@/hooks/useGame'
+import { useGame } from '@/hooks/useGameCapital'
 
 import Options from './options'
 import Score from './score'
 import StateImg from './stateImg'
 import FinishMsg from './finishMsg'
 
-const GameState = memo(({level}) => {
+const Game = memo(({level, gameMode}) => {
     //hooks
     const { states, initializing } = useContext(StatesContext);
     const { gameArray, isLoading } = useSortStates(level);
@@ -31,7 +31,7 @@ const GameState = memo(({level}) => {
 
     const handleTouch = useCallback((option, index) => {
       setGameState((prevState) => {
-        const isCorrect = option === gameArray[prevState.indexGame].name;
+        const isCorrect = option === gameArray[prevState.indexGame][gameMode];
         return {
           ...prevState,
           selected: true,
@@ -54,7 +54,7 @@ const GameState = memo(({level}) => {
       }, 1000);
     }, [gameArray]);
 
-  useGame(gameArray, states, setGameState, gameState);
+  useGame(gameArray, states, setGameState, gameState, gameMode);
 
   return (
     <>
@@ -80,6 +80,9 @@ const GameState = memo(({level}) => {
     {gameState.gameStarted&&!gameState.finished&&
       <View className="h-full w-full justify-center items-center"> 
         <Score correct={gameState.correct} incorrect={gameState.incorrect} index={gameState.indexGame} />
+        {gameMode==="capital"&&
+        <Text className="text-center font-medium text-lg">{gameArray[gameState.indexGame].name}</Text>
+        }
         <StateImg currentState={gameArray[gameState.indexGame]} />
         <Options
          options={gameState.options}
@@ -102,4 +105,4 @@ const GameState = memo(({level}) => {
   )
 })
 
-export default memo(GameState);
+export default memo(Game);

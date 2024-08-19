@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react";
 import { useLocalSearchParams, useGlobalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context'
-import GameCapital from "@/components/game/gameCapital";
+import  Game from "../../../components/game/gameState";
 
 const GuessCapital = memo(() => {
   //params
@@ -9,8 +9,8 @@ const GuessCapital = memo(() => {
   
   return (
     <SafeAreaView className="bg-cloudy-200 h-full w-full pt-4 p-4">
-        <GameCapital level={glob.level}></GameCapital>          
-    </SafeAreaView>
+        <Game level={glob.level} gameMode="capital"></Game>          
+        </SafeAreaView>
   );
 });
 
