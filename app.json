@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "",
-      "resizeMode": "contain",
+      "resizeMode": "",
       "backgroundColor": "#ffffff"
     },
     "ios": {

@@ -9,6 +9,7 @@ import Options from './options'
 import Score from './score'
 import StateImg from './stateImg'
 import FinishMsg from './finishMsg'
+import LoaderGame from './loaderGame'
 
 const Game = memo(({level, gameMode}) => {
     //hooks
@@ -59,9 +60,7 @@ const Game = memo(({level, gameMode}) => {
   return (
     <>
     {isLoading&&
-    <View className="h-full w-full justify-center items-center">
-      <ActivityIndicator size="large" color="#26252c" />
-    </View>
+    <LoaderGame></LoaderGame>
     }
     <>
     {!isLoading&&gameArray&&!gameState.gameStarted&&

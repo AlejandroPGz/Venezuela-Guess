@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import StateCard from '@/components/wiki/stateCard'
 import { StatesContext } from '@/context/countriesContext'
+import LoaderGame from '@/components/game/loaderGame'
 const flag = require("../assets/images/flag.png")
 
 export default function Wiki() {
@@ -28,19 +29,16 @@ export default function Wiki() {
     }
 
   return (
+    <>
+      {initializing&&
+      <LoaderGame/>}
     <SafeAreaView className="w-full h-full bg-scarpa-flow-50 px-4 mt-2 mb-4">
         <ScrollView className="mb-4">
-      {/* <TouchableOpacity>
-        <Ionicons 
-        onPress={() => router.push("/home")}
-        style={{marginTop: 10}} name="chevron-back" size={24} color="black" />
-      </TouchableOpacity> */}
       <Text className="text-4xl font-semibold text-cloudy-950 mt-8">Wiki</Text>
       <View className="mt-6 flex-row items-center w-full">
         <Text className="text-3xl font-medium  text-cloudy-900">Venezuela</Text>
         <Image className="h-12 w-14 ml-4" style={{ resizeMode: 'cover'}} 
         source={flag}
-        
         ></Image>
       </View>
       
@@ -54,10 +52,6 @@ export default function Wiki() {
         className="border-input rounded-lg py-3 px-4 shadow-xl shadow-black bg-white mt-2"></TextInput>
       </View>
 
-
-      {initializing&&
-      <ActivityIndicator className="mt-6" size="large" color="#26252c" />}
-
       {states&&!search && 
     //   <FlatList
     //   data={states}
@@ -68,18 +62,14 @@ export default function Wiki() {
       <StateCard item={state} key={state.id}></StateCard>
     ))
       }
-
+      
       {search &&
        search.map((state)=> (
         <StateCard item={state} key={state.id}></StateCard>
       ))
       }
-
-      {/* {states.map((state)=> (
-        <StateCard item={state} key={state.id}></StateCard>
-      ))} */}
-
       </ScrollView>
     </SafeAreaView>
+    </>
   )
 }
