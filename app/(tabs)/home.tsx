@@ -42,7 +42,7 @@ export default function Home() {
         })}
         className="text-lg font-medium text-cloudy-900 underline decoration-cloudy-900 decoration-solid focus:text-cloudy-400">Alejandro Paradiso Dev</Text>
         <Text 
-        onPress={() => Linking.openURL('https://github.com/AlejandroPGz').catch((err) => {
+        onPress={() => Linking.openURL('https://portfolio-56oc.onrender.com').catch((err) => {
           ToastAndroid.show("Failed to open URL", ToastAndroid.LONG)
         })}
         className="text-lg font-medium text-cloudy-800">Portafolio</Text>

@@ -10,10 +10,10 @@ export default function StateCard({item}) {
     <Image className="h-48 w-64 self-center mt-4 rounded-lg" style={{ resizeMode: 'stretch'}} source={{uri:item.image}}></Image>
     <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Capital: <Text className="text-cloudy-950 font-medium">{item.capital}</Text></Text>
     <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Ubicación: <Text className="text-cloudy-950 font-medium">{item.location}</Text></Text>
-    <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Turismo: <Text className="text-cloudy-950 font-medium">{item.tourism}</Text></Text>
+    {/* <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Turismo: <Text className="text-cloudy-950 font-medium">{item.tourism}</Text></Text>
     <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Clima: <Text className="text-cloudy-950 font-medium">{item.weather}</Text></Text>
     <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Relieve: <Text className="text-cloudy-950 font-medium">{item.relief}</Text></Text>
-    <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Fauna y flora: <Text className="text-cloudy-950 font-medium">{item.fauna_and_flora}</Text></Text>
+    <Text className="w-full text-lg font-bold text-cloudy-950 mt-2 text-left">Fauna y flora: <Text className="text-cloudy-950 font-medium">{item.fauna_and_flora}</Text></Text> */}
   </View>
 );
 }

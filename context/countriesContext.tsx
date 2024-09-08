@@ -7,7 +7,7 @@ export const StatesProvider = ({ children }) => {
   const [states, setStates] = useState();
   
   const getStates = async () => {
-      const resp = await fetch("https://venezuela-api.onrender.com/api/states/66ae80a80a3590155ccae9ee/allStates/venezuela/");
+      const resp = await fetch("https://venezuela-api.onrender.com/api/states/66ce5bbed42122ec3f636dfb/allStates/venezuela/");
       const data = await resp.json();       
       setStates((prev) => (
         data
