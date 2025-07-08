@@ -1,6 +1,5 @@
-import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, ActivityIndicator, FlatList } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
-import { Ionicons } from '@expo/vector-icons'
+import { View, Text, TextInput, Image, ScrollView } from 'react-native'
+import React, { useContext, useState } from 'react'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import StateCard from '@/components/wiki/stateCard'
@@ -53,11 +52,6 @@ export default function Wiki() {
       </View>
 
       {states&&!search && 
-    //   <FlatList
-    //   data={states}
-    //   renderItem={({item}) => <StateCard item={item} />}
-    //   keyExtractor={item => item.id}
-    // />
     states.map((state)=> (
       <StateCard item={state} key={state.id}></StateCard>
     ))

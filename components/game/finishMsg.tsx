@@ -3,7 +3,7 @@ import React from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
 
-const FinishMsg = ({ level, correct, incorrect }) => {
+const FinishMsg = ({ level, correct, incorrect, name }) => {
     const router = useRouter();
     
     return (
@@ -19,10 +19,18 @@ const FinishMsg = ({ level, correct, incorrect }) => {
     </View>
     <TouchableOpacity
     className="bg-cloudy-50 px-4 justify-center items-center py-2 rounded-3xl"
-    onPress={() => {
-        if (Number(level) === 1) {
-            router.replace("/guessState/1");
-        } else router.replace("/guessState/2");
+    onPress={() => {        
+        switch (name) {
+            case name = "name":
+            if (Number(level) === 1) {
+            router.replace("/game/guess/1?gameMode=name");
+            } else router.replace("/game/guess/2?gameMode=name");
+            break;
+            case name = "capital":
+            if (Number(level) === 1) {
+            router.replace("/game/guess/1?gameMode=capital");
+            } else router.replace("/game/guess/2?gameMode=capital");
+        }
     }}
     >
         <Text className="text-lg font-medium text-cloudy-950">Comenzar de nuevo</Text>

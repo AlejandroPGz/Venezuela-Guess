@@ -1,6 +1,5 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React, { memo, useCallback, useContext, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatesContext } from '@/context/countriesContext'
 import { useSortStates } from '@/hooks/useSortStates'
 import { useGame } from '@/hooks/useGameCapital'
@@ -93,7 +92,7 @@ const Game = memo(({level, gameMode}) => {
     }
     {gameState.finished&&
     <View className="w-full h-full justify-center items-center">
-      <FinishMsg level={level} correct={gameState.correct} incorrect={gameState.incorrect}/>
+      <FinishMsg level={level} correct={gameState.correct} incorrect={gameState.incorrect} name={gameMode} />
     </View>
     }
     {!isLoading&&!gameArray&&

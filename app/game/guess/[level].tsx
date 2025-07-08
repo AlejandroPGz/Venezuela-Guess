@@ -1,5 +1,5 @@
-import { memo, useEffect } from "react";
-import { useLocalSearchParams, useGlobalSearchParams } from 'expo-router';
+import { memo } from "react";
+import { useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import  Game from "../../../components/game/gameState";
 

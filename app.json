@@ -2,7 +2,7 @@
   "expo": {
     "name": "Venezuela Quizz",
     "slug": "Venezuela_Quizz",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -40,6 +40,7 @@
       "eas": {
         "projectId": "40a28154-bce2-469a-8aef-dbaaa7023d01"
       }
-    }
+    },
+    "owner": "pitupiri"
   }
 }
